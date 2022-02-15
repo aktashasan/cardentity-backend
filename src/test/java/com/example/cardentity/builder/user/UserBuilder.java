@@ -2,17 +2,14 @@ package com.example.cardentity.builder.user;
 
 
 import com.example.cardentity.user.model.UserDTO;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserBuilder {
 
     private UserDTO userDTO = new UserDTO();
-
-    public UserBuilder(UserDTO userDTO) {
-        this.userDTO = userDTO;
-    }
-
-    public UserBuilder() {
-    }
 
     public UserBuilder buildSomeDummy(){
         this.userDTO.setUsername("admin");
