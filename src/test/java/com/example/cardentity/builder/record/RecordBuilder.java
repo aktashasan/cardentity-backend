@@ -10,16 +10,14 @@ import lombok.NoArgsConstructor;
 public class RecordBuilder {
 
     private RecordDTO recordDTO = new RecordDTO();
-    private PersonDTO personDTO = new PersonDTO();
+
 
     public RecordBuilder buildSomeDummy(){
-        this.recordDTO.setPerson(personDTO);
         this.recordDTO.setOperationType("Mesai");
-
         return this;
     }
     public RecordBuilder withPerson(PersonDTO person){
-        this.recordDTO.setPerson(personDTO);
+        this.recordDTO.setPerson(person);
         return this;
     }
     public RecordBuilder withOperationType(String operationType){

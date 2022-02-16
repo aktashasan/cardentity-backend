@@ -31,7 +31,7 @@ public class PersonMapperImpl implements Serializable {
 
         Person person = new Person();
 
-        person.setId(person.getId());
+        person.setId(personDTO.getId());
         person.setFirstName(personDTO.getFirstName());
         person.setLastName(personDTO.getLastName());
         person.setIdentityNumber(personDTO.getIdentityNumber());
