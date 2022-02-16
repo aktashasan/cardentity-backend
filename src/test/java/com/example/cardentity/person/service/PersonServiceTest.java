@@ -29,8 +29,8 @@ class PersonServiceTest {
                 .buildSomeDummy()
                 .withFirstName("Hasan")
                 .build();
-        PersonDTO savedUser = personService.addPerson(personDTO);
-        Assertions.assertNotNull(savedUser.getId());
+        PersonDTO savedPerson = personService.addPerson(personDTO);
+        Assertions.assertNotNull(savedPerson.getId());
     }
 
     @Test
@@ -40,9 +40,9 @@ class PersonServiceTest {
                 .buildSomeDummy()
                 .withFirstName("Hasan")
                 .build();
-        PersonDTO savedUser = personService.addPerson(personDTO);
-        PersonDTO findUser = personService.findPersonById(savedUser.getId());
-        Assertions.assertNotNull(findUser);
+        PersonDTO savedPerson = personService.addPerson(personDTO);
+        PersonDTO findPerson = personService.findPersonById(savedPerson.getId());
+        Assertions.assertNotNull(findPerson);
     }
 
     @Test
@@ -52,9 +52,9 @@ class PersonServiceTest {
                 .buildSomeDummy()
                 .withFirstName("Hasan")
                 .build();
-        PersonDTO savedUser = personService.addPerson(personDTO);
-        Boolean deletedUser = personService.deletePersonById(savedUser.getId());
-        Assertions.assertEquals(deletedUser,true);
+        PersonDTO savedPerson = personService.addPerson(personDTO);
+        Boolean deletedPerson = personService.deletePersonById(savedPerson.getId());
+        Assertions.assertEquals(deletedPerson,true);
     }
 
     @Test
