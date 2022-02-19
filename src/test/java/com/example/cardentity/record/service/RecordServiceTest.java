@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -92,17 +93,23 @@ class RecordServiceTest {
         RecordDTO recordDTO = new RecordBuilder()
                 .buildSomeDummy()
                 .build();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         RecordDTO savedRecord = recordService.addRecord(recordDTO);
-        String fromDateInString = "31-08-2020 10:20:56";
-        Date from = sdf.parse(fromDateInString);
-        String toDateInString = "31-08-2021 10:21:56";
-        Date to = sdf.parse(toDateInString);
-        List<RecordDTO> recordDTOList = recordService.findByTimeBetween(from,to);
+        Date date = new Date();
+        System.out.println(formatter.format(date));
 
+        Calendar from = Calendar.getInstance();
+        from.setTime(date);
+        from.add(Calendar.MINUTE, -10);
+        System.out.println(from.getTime());
+
+        Calendar to = Calendar.getInstance();
+        to.setTime(date);
+        to.add(Calendar.MINUTE, +10);
+        System.out.println(to.getTime());
+
+        List<RecordDTO> recordDTOList = recordService.findByTimeBetween(from.getTime(),to.getTime());
         Assertions.assertEquals(1,recordDTOList.size());
-
-
-
+        System.out.println(recordDTOList);
     }
 }

@@ -18,8 +18,7 @@ public class RecordService {
     private final RecordRepository recordRepository;
 
     public RecordDTO addRecord(RecordDTO recordDTO){
-
-
+        recordDTO.setTime(new Date());
         Record record = recordRepository.save(RecordMapperImpl.toEntity(recordDTO));
         return RecordMapperImpl.toDTO(record);
     }
