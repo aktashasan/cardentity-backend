@@ -1,4 +1,4 @@
-package com.example.cardentity.user.authenticaton;
+package com.example.cardentity.user.authentication;
 
 import com.example.cardentity.builder.user.UserBuilder;
 import com.example.cardentity.user.authentication.AuthenticationService;
