@@ -20,9 +20,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 //username and psw don't need any authentication (we provide this with OPTIONS)
-                .antMatchers(HttpMethod.OPTIONS,"/api/**").permitAll()
+                .antMatchers(HttpMethod.OPTIONS,"/app/**").permitAll()
                 // but other requests need authentication
-                .antMatchers("/api/**").authenticated()
+                .antMatchers("/app/**").authenticated()
 
                 .anyRequest().authenticated()
                 .and()
