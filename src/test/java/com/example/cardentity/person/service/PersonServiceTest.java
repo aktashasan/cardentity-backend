@@ -54,7 +54,7 @@ class PersonServiceTest {
                 .build();
         PersonDTO savedPerson = personService.addPerson(personDTO);
         Boolean deletedPerson = personService.deletePersonById(savedPerson.getId());
-        Assertions.assertEquals(deletedPerson,true);
+        Assertions.assertEquals(deletedPerson,Boolean.TRUE);
     }
 
     @Test

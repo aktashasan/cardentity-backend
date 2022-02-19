@@ -13,6 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @AutoConfigureDataMongo
@@ -25,7 +31,7 @@ class RecordServiceTest {
     private PersonService personService;
 
     @Test
-    void addRecord() {
+    void addRecord() throws ParseException {
         PersonDTO personDTO = new PersonBuilder()
                 .buildSomeDummy()
                 .build();
@@ -54,14 +60,49 @@ class RecordServiceTest {
     }
 
     @Test
-    void deleteRecordById() {
+    void deleteRecordById() throws ParseException {
         recordRepository.deleteAll();
         RecordDTO recordDTO = new RecordBuilder()
                 .buildSomeDummy()
                 .withOperationType("sdlfjshd")
                 .build();
         RecordDTO savedRecord = recordService.addRecord(recordDTO);
-        Boolean deletedRecord = recordService.deleteRecordById(savedRecord.getId());
-        Assertions.assertEquals(deletedRecord,true);
+        Boolean record = recordService.deleteRecordById(savedRecord.getId());
+        Assertions.assertEquals(Boolean.TRUE,record);
+    }
+
+    @Test
+    void findRecordByOperationType() throws ParseException {
+        RecordDTO recordDTO = new RecordBuilder()
+                .buildSomeDummy()
+                .withOperationType("Giriş")
+                .build();
+        RecordDTO savedRecord = recordService.addRecord(recordDTO);
+        recordDTO.setOperationType("çıkış");
+        RecordDTO savedRecord2 = recordService.addRecord(recordDTO);
+
+        List<RecordDTO> recordDTOList = recordService.findRecordByOperationType(savedRecord2.getOperationType());
+        System.out.println(recordDTOList);
+        Assertions.assertEquals(1,recordDTOList.size());
+    }
+
+    @Test
+    void findByTimeBetween() throws Exception {
+        recordRepository.deleteAll();
+        RecordDTO recordDTO = new RecordBuilder()
+                .buildSomeDummy()
+                .build();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        RecordDTO savedRecord = recordService.addRecord(recordDTO);
+        String fromDateInString = "31-08-2020 10:20:56";
+        Date from = sdf.parse(fromDateInString);
+        String toDateInString = "31-08-2021 10:21:56";
+        Date to = sdf.parse(toDateInString);
+        List<RecordDTO> recordDTOList = recordService.findByTimeBetween(from,to);
+
+        Assertions.assertEquals(1,recordDTOList.size());
+
+
+
     }
 }
