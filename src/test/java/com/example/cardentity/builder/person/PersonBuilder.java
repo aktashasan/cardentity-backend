@@ -10,10 +10,11 @@ public class PersonBuilder {
     private PersonDTO personDTO = new PersonDTO();
 
     public PersonBuilder buildSomeDummy(){
-        this.personDTO.setCode("1234");
-        this.personDTO.setFirstName("admin");
-        this.personDTO.setLastName("admin");
+        this.personDTO.setCode("20120303");
+        this.personDTO.setFirstName("Admin");
+        this.personDTO.setLastName("Adminoğlu");
         this.personDTO.setCardId("1234");
+        this.personDTO.setAuthority("Manager");
         return this;
     }
     public PersonBuilder withCode(String code){
