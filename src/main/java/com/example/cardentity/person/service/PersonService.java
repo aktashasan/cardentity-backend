@@ -51,8 +51,8 @@ public class PersonService {
         return personDTOList;
     }
 
-    public PersonDTO findPersonByIdentityNumber(String identityNumber){
-        Person person = personRepository.findByIdentityNumber(identityNumber);
+    public PersonDTO findPersonByCode(String code){
+        Person person = personRepository.findByCode(code);
         return PersonMapperImpl.toDTO(person);
     }
 

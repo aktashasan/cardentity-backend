@@ -10,6 +10,6 @@ public class PersonDTO implements Serializable {
     private String firstName;
     private String lastName;
     private String authority;
-    private String identityNumber;
+    private String code;
     private String cardId;
 }

@@ -70,13 +70,13 @@ class PersonServiceTest {
     }
 
     @Test
-    void findPersonByIdentityNumber() {
+    void findPersonByCode() {
         PersonDTO personDTO = new PersonDTO();
 
-        personDTO.setIdentityNumber("12312347");
+        personDTO.setCode("12312347");
 
         PersonDTO savedPerson = personService.addPerson(personDTO);
-        PersonDTO resultPerson= personService.findPersonByIdentityNumber(savedPerson.getIdentityNumber());
+        PersonDTO resultPerson= personService.findPersonByCode(savedPerson.getCode());
         Assertions.assertEquals(savedPerson,resultPerson);
     }
 }

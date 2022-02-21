@@ -24,7 +24,7 @@ public class Person implements Serializable {
     private String authority;
 
     @Field
-    private String identityNumber;
+    private String code;
 
     @Field
     private String cardId;
