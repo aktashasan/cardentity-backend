@@ -4,6 +4,8 @@ import com.example.cardentity.person.model.PersonMapperImpl;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class RecordMapperImpl implements Serializable {
@@ -36,5 +38,18 @@ public class RecordMapperImpl implements Serializable {
         record.setPerson(PersonMapperImpl.toEntity(recordDTO.getPerson()));
 
         return record;
+    }
+
+    public static List<RecordDTO> toDTOList(List<Record> recordList){
+        if (recordList == null) {
+            return null;
+        }
+
+        List<RecordDTO> recordDTOList = new ArrayList<>();
+
+        for(Record record :recordList){
+            recordDTOList.add(RecordMapperImpl.toDTO(record));
+        }
+        return recordDTOList;
     }
 }

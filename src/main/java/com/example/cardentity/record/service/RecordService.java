@@ -7,6 +7,8 @@ import com.example.cardentity.record.repository.RecordRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,6 +18,7 @@ public class RecordService {
     private final RecordRepository recordRepository;
 
     public RecordDTO addRecord(RecordDTO recordDTO){
+        recordDTO.setTime(new Date());
         Record record = recordRepository.save(RecordMapperImpl.toEntity(recordDTO));
         return RecordMapperImpl.toDTO(record);
     }
@@ -39,9 +42,15 @@ public class RecordService {
         return Boolean.FALSE;
     }
 
-    /**
-     * findByOperationType
-     * findByTimeBetween
-     */
+    public List<RecordDTO> findRecordByOperationType(String operationType){
+        List<Record> recordList = recordRepository.findByOperationType(operationType);
+        return RecordMapperImpl.toDTOList(recordList);
+    }
+
+
+     public List<RecordDTO> findByTimeBetween(Date time, Date to){
+        List<Record> recordList = recordRepository.findByTimeBetween(time, to);
+        return RecordMapperImpl.toDTOList(recordList);
+     }
 
 }
