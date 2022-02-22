@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -152,13 +153,19 @@ class RecordResourceTest {
         Date to = toCalendar.getTime();
         System.out.println(to);
 
+        List<Date> dates = new ArrayList<>();
+        dates.add(from);
+        dates.add(to);
+
+        String jsonDate = objectMapper.writeValueAsString(dates);
+
         ResultActions resultActions = this.mockMvc
-                .perform(get("/app/record/get/time/"
-                        + from
-                        + "/"
-                        + to))
+                .perform(post("/app/records/get/timeBetween")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonDate))
                 .andDo(print())
                 .andExpect(status().isOk());
+
         MvcResult mvcResult = resultActions.andReturn();
         String contentAsString = mvcResult.getResponse().getContentAsString();
 

@@ -40,8 +40,8 @@ public class RecordResource {
         return ResponseEntity.ok(recordService.findRecordByOperationType(operationType));
     }
 
-    @PostMapping("/record/post/time")
-    public ResponseEntity<List<RecordDTO>> findByTypeBetween(@RequestBody List<Date> from){
-        return ResponseEntity.ok(recordService.findByTimeBetween(from));
+    @PostMapping("/records/get/timeBetween")
+    public ResponseEntity<List<RecordDTO>> findByTypeBetween(@RequestBody List<Date> dates){
+        return ResponseEntity.ok(recordService.findByTimeBetween(dates));
     }
 }

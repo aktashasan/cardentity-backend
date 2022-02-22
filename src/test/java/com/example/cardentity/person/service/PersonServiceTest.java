@@ -27,6 +27,8 @@ class PersonServiceTest {
     void addPerson() {
         PersonDTO personDTO = new PersonBuilder()
                 .buildSomeDummy()
+                .withFirstName("Mehmet Faruk")
+                .withCardId("12345")
                 .build();
         PersonDTO savedPerson = personService.addPerson(personDTO);
         Assertions.assertNotNull(savedPerson.getId());

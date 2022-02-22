@@ -48,7 +48,7 @@ public class RecordService {
     }
 
 
-     public List<RecordDTO> findByTimeBetween(List<Date> from){
+     public List<RecordDTO> findRecordsByTimeBetween(List<Date> from){
         List<Record> recordList = recordRepository.findByTimeBetween(from.get(0),from.get(1));
         return RecordMapperImpl.toDTOList(recordList);
      }

@@ -111,7 +111,7 @@ class RecordServiceTest {
         dateList.add(from.getTime());
         dateList.add(to.getTime());
 
-        List<RecordDTO> recordDTOList = recordService.findByTimeBetween(dateList);
+        List<RecordDTO> recordDTOList = recordService.findRecordsByTimeBetween(dateList);
         Assertions.assertEquals(1,recordDTOList.size());
         System.out.println(recordDTOList);
     }
