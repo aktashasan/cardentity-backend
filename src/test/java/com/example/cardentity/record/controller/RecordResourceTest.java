@@ -20,7 +20,6 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -138,28 +137,26 @@ class RecordResourceTest {
         RecordDTO recordDTO = new RecordBuilder()
                 .buildSomeDummy()
                 .build();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         RecordDTO savedRecord = recordService.addRecord(recordDTO);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
 
-        Calendar from = Calendar.getInstance();
-        from.setTime(savedRecord.getTime());
-        from.add(Calendar.MINUTE, -10);
+        Calendar fromCalendar = Calendar.getInstance();
+        fromCalendar.setTime(savedRecord.getTime());
+        fromCalendar.add(Calendar.MINUTE, -10);
+        Date from = fromCalendar.getTime();
         System.out.println(from);
 
-        Calendar to = Calendar.getInstance();
-        to.setTime(savedRecord.getTime());
-        to.add(Calendar.MINUTE, +10);
+        Calendar toCalendar = Calendar.getInstance();
+        toCalendar.setTime(savedRecord.getTime());
+        toCalendar.add(Calendar.MINUTE, +10);
+        Date to = toCalendar.getTime();
         System.out.println(to);
 
-        List<Date> dateList = new ArrayList<>();
-        dateList.add(from.getTime());
-        dateList.add(to.getTime());
-        String jsonPerson = objectMapper.writeValueAsString(dateList);
-
         ResultActions resultActions = this.mockMvc
-                .perform(post("/app/record/post/time")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonPerson))
+                .perform(get("/app/record/get/time/"
+                        + from
+                        + "/"
+                        + to))
                 .andDo(print())
                 .andExpect(status().isOk());
         MvcResult mvcResult = resultActions.andReturn();

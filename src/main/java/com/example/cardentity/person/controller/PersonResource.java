@@ -17,7 +17,11 @@ public class PersonResource {
 
     @PostMapping("/person/save")
     public ResponseEntity<PersonDTO> addPerson(@RequestBody PersonDTO personDTO){
-        return ResponseEntity.ok(personService.addPerson(personDTO));
+        PersonDTO savedPerson = personService.addPerson(personDTO);
+        if (savedPerson == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(savedPerson);
     }
 
     @GetMapping("/person/delete/{id}")
@@ -36,7 +40,11 @@ public class PersonResource {
 
     @GetMapping("/person/get/code/{code}")
     public ResponseEntity<PersonDTO> findPersonByCode(@PathVariable String code){
-        return ResponseEntity.ok(personService.findPersonByCode(code));
+        PersonDTO personDTO = personService.findPersonByCode(code);
+        if (personDTO == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(personDTO);
     }
 
     @GetMapping("/persons/get")

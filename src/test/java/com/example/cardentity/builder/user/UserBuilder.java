@@ -30,16 +30,10 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder withLastName(String lastName){
-        this.userDTO.setLastName(lastName);
-        return this;
-    }
-
     public UserBuilder withPassword(String password){
         this.userDTO.setPassword(password);
         return this;
     }
-
 
     public UserDTO build(){
         return this.userDTO;
