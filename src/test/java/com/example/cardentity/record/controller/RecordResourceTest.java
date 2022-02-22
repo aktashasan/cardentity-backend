@@ -18,7 +18,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -153,10 +152,7 @@ class RecordResourceTest {
         System.out.println(to);
 
         ResultActions resultActions = this.mockMvc
-                .perform(get("/app/record/get/time/"
-                        + from
-                        + "/"
-                        + to))
+                .perform(get("/app/record/get/time/"+ from + "/"+ to))
                 .andDo(print())
                 .andExpect(status().isOk());
         MvcResult mvcResult = resultActions.andReturn();

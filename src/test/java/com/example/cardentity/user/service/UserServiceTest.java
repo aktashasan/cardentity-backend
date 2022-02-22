@@ -53,9 +53,8 @@ class UserServiceTest {
                 .withFirstName("Hasan")
                 .build();
         UserDTO savedUser = userService.addUser(userDTO);
-        boolean deletedUser = userService.deleteUserById(savedUser.getId());
-        Assertions.assertEquals(deletedUser,true);
-
+        Boolean deletedUser = userService.deleteUserById(savedUser.getId());
+        Assertions.assertEquals(deletedUser,Boolean.TRUE);
     }
 
     @Test
