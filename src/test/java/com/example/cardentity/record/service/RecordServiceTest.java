@@ -107,7 +107,11 @@ class RecordServiceTest {
         to.add(Calendar.MINUTE, +10);
         System.out.println(to.getTime());
 
-        List<RecordDTO> recordDTOList = recordService.findByTimeBetween(from.getTime(),to.getTime());
+        List<Date> dateList = new ArrayList<>();
+        dateList.add(from.getTime());
+        dateList.add(to.getTime());
+
+        List<RecordDTO> recordDTOList = recordService.findByTimeBetween(dateList);
         Assertions.assertEquals(1,recordDTOList.size());
         System.out.println(recordDTOList);
     }

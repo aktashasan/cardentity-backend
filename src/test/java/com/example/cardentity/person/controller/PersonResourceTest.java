@@ -135,7 +135,7 @@ class PersonResourceTest {
         PersonDTO savedPerson = personService.addPerson(personDTO);
 
         ResultActions resultActions = this.mockMvc
-                .perform(get("/app/persons/get/"))
+                .perform(get("/app/persons/get"))
                 .andDo(print())
                 .andExpect(status().isOk());
         MvcResult mvcResult = resultActions.andReturn();

@@ -27,7 +27,7 @@ public class RecordResource {
     }
 
     @GetMapping("/record/get/id/{id}")
-    public ResponseEntity<RecordDTO> findRecordById(@PathVariable String id){
+    public ResponseEntity<RecordDTO> findRecordById(@PathVariable("id") String id){
         RecordDTO recordDTO = recordService.findRecordById(id);
         if (recordDTO == null) {
             return  ResponseEntity.notFound().build();
@@ -40,9 +40,8 @@ public class RecordResource {
         return ResponseEntity.ok(recordService.findRecordByOperationType(operationType));
     }
 
-    @GetMapping("/record/get/time/{from}/{to}")
-    public ResponseEntity<List<RecordDTO>> findByTypeBetween(@PathVariable Date from,
-                                                             @PathVariable Date to){
-        return ResponseEntity.ok(recordService.findByTimeBetween(from,to));
+    @PostMapping("/record/post/time")
+    public ResponseEntity<List<RecordDTO>> findByTypeBetween(@RequestBody List<Date> from){
+        return ResponseEntity.ok(recordService.findByTimeBetween(from));
     }
 }

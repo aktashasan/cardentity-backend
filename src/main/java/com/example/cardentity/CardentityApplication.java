@@ -14,7 +14,7 @@ public class CardentityApplication {
 	}
 
 	@Bean
-	WebMvcConfigurer corsConfiguration() {
+	WebMvcConfigurer Configuration() {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
