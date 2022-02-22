@@ -19,6 +19,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -135,11 +138,25 @@ class RecordResourceTest {
                 .buildSomeDummy()
                 .build();
         RecordDTO savedRecord = recordService.addRecord(recordDTO);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+
+        Calendar fromCalendar = Calendar.getInstance();
+        fromCalendar.setTime(savedRecord.getTime());
+        fromCalendar.add(Calendar.MINUTE, -10);
+        Date from = fromCalendar.getTime();
+        System.out.println(from);
+
+        Calendar toCalendar = Calendar.getInstance();
+        toCalendar.setTime(savedRecord.getTime());
+        toCalendar.add(Calendar.MINUTE, +10);
+        Date to = toCalendar.getTime();
+        System.out.println(to);
 
         ResultActions resultActions = this.mockMvc
-                .perform(get("/app/record/get/time/" + savedRecord.getTime()
+                .perform(get("/app/record/get/time/"
+                        + from
                         + "/"
-                        + savedRecord.getTime() ))
+                        + to))
                 .andDo(print())
                 .andExpect(status().isOk());
         MvcResult mvcResult = resultActions.andReturn();

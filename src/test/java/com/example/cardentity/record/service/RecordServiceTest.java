@@ -95,16 +95,15 @@ class RecordServiceTest {
                 .build();
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         RecordDTO savedRecord = recordService.addRecord(recordDTO);
-        Date date = new Date();
-        System.out.println(formatter.format(date));
+        System.out.println(formatter.format(savedRecord.getTime()));
 
         Calendar from = Calendar.getInstance();
-        from.setTime(date);
+        from.setTime(savedRecord.getTime());
         from.add(Calendar.MINUTE, -10);
         System.out.println(from.getTime());
 
         Calendar to = Calendar.getInstance();
-        to.setTime(date);
+        to.setTime(savedRecord.getTime());
         to.add(Calendar.MINUTE, +10);
         System.out.println(to.getTime());
 
