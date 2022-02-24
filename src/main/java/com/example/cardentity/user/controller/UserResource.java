@@ -2,6 +2,7 @@ package com.example.cardentity.user.controller;
 
 import com.example.cardentity.user.model.User;
 import com.example.cardentity.user.model.UserDTO;
+import com.example.cardentity.user.model.UserMapperImpl;
 import com.example.cardentity.user.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -41,8 +42,12 @@ public class UserResource {
     }
 
     @GetMapping("/user/get/username/{username}")
-    public ResponseEntity<User> findByUsername(@PathVariable String username){
-        return ResponseEntity.ok(userService.findByUsername(username));
+    public ResponseEntity<UserDTO> findByUsername(@PathVariable String username){
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(UserMapperImpl.toDTO(user));
     }
     @GetMapping("/users/get")
     public ResponseEntity<List<UserDTO>> findAllUsers(){
