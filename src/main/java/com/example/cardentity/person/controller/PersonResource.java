@@ -16,12 +16,9 @@ public class PersonResource {
     private PersonService personService;
 
     @PostMapping("/person/save")
-    public ResponseEntity<PersonDTO> addPerson(@RequestBody PersonDTO personDTO){
+    public ResponseEntity<PersonDTO> addPerson(@RequestBody PersonDTO personDTO) {
         PersonDTO savedPerson = personService.addPerson(personDTO);
-        if (savedPerson == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(savedPerson);
+        return savedPerson == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(savedPerson);
     }
 
     @GetMapping("/person/delete/{id}")
@@ -32,19 +29,13 @@ public class PersonResource {
     @GetMapping("/person/get/id/{id}")
     public ResponseEntity<PersonDTO> findPersonById(@PathVariable String id){
         PersonDTO personDTO = personService.findPersonById(id);
-        if (personDTO == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(personDTO);
+        return personDTO == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(personDTO);
     }
 
     @GetMapping("/person/get/code/{code}")
     public ResponseEntity<PersonDTO> findPersonByCode(@PathVariable String code){
         PersonDTO personDTO = personService.findPersonByCode(code);
-        if (personDTO == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(personDTO);
+        return personDTO == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(personDTO);
     }
 
     @GetMapping("/persons/get")

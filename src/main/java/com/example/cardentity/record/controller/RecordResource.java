@@ -3,6 +3,7 @@ package com.example.cardentity.record.controller;
 import com.example.cardentity.record.model.RecordDTO;
 import com.example.cardentity.record.service.RecordService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,19 +30,18 @@ public class RecordResource {
     @GetMapping("/record/get/id/{id}")
     public ResponseEntity<RecordDTO> findRecordById(@PathVariable("id") String id){
         RecordDTO recordDTO = recordService.findRecordById(id);
-        if (recordDTO == null) {
-            return  ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(recordDTO);
+        return recordDTO == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(recordDTO);
     }
 
     @GetMapping("/record/get/operation/{operationType}")
     public ResponseEntity<List<RecordDTO>> findRecordByOperationType(@PathVariable String operationType){
-        return ResponseEntity.ok(recordService.findRecordByOperationType(operationType));
+        List<RecordDTO> recordDTOS = recordService.findRecordByOperationType(operationType);
+        return recordDTOS.size() > 0 ? ResponseEntity.ok(recordDTOS) : ResponseEntity.notFound().build();
     }
 
     @PostMapping("/records/get/timeBetween")
     public ResponseEntity<List<RecordDTO>> findRecordsByTypeBetween(@RequestBody List<Date> dates){
-        return ResponseEntity.ok(recordService.findRecordsByTimeBetween(dates));
+        List<RecordDTO> recordDTOS = recordService.findRecordsByTimeBetween(dates);
+        return recordDTOS.size() > 0 ? ResponseEntity.ok(recordDTOS) : ResponseEntity.notFound().build();
     }
 }
