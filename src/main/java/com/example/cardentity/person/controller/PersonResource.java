@@ -39,8 +39,10 @@ public class PersonResource {
     }
 
     @GetMapping("/persons/get")
-    public ResponseEntity<List<PersonDTO>> findAllPersons(){
-        return ResponseEntity.ok(personService.findAllPersons());
+    public ResponseEntity<List<PersonDTO>> findAllPersons(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "50") int size){
+        return ResponseEntity.ok(personService.findAllPersons(page, size));
     }
 
 

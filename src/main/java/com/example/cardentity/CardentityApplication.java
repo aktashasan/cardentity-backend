@@ -2,11 +2,13 @@ package com.example.cardentity;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
+@EnableCaching
 public class CardentityApplication {
 
 	public static void main(String[] args) {
@@ -20,7 +22,10 @@ public class CardentityApplication {
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
 						.allowedOriginPatterns("*")
-						.allowedHeaders("*").maxAge(0).allowCredentials(true);
+						.allowedMethods("GET","POST","PUT","DELETE","PATCH","OPTIONS")
+						.allowedHeaders("*")
+						.maxAge(3600)
+						.allowCredentials(true);
 			}
 		};
 	}

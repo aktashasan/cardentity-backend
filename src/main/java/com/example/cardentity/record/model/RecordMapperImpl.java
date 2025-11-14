@@ -1,13 +1,11 @@
 package com.example.cardentity.record.model;
 
 import com.example.cardentity.person.model.PersonMapperImpl;
-import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 public class RecordMapperImpl implements Serializable {
 
     public static RecordDTO toDTO(Record record){

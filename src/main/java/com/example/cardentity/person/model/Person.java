@@ -2,6 +2,7 @@ package com.example.cardentity.person.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -24,6 +25,7 @@ public class Person implements Serializable {
     private String authority;
 
     @Field
+    @Indexed(unique = true)
     private String code;
 
     @Field

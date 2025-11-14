@@ -1,10 +1,7 @@
 package com.example.cardentity.person.model;
 
-import org.springframework.stereotype.Component;
-
 import java.io.Serializable;
 
-@Component
 public class PersonMapperImpl implements Serializable {
 
     public static PersonDTO toDTO(Person person){

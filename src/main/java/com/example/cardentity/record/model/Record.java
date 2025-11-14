@@ -1,9 +1,9 @@
 package com.example.cardentity.record.model;
 
 import com.example.cardentity.person.model.Person;
-import com.example.cardentity.person.model.PersonDTO;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -19,9 +19,11 @@ public class Record implements Serializable {
     private String id;
 
     @Field
+    @Indexed
     private String operationType;
 
     @Field
+    @Indexed
     private Date time;
 
     @DBRef

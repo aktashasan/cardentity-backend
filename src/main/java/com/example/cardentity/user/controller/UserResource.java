@@ -50,8 +50,9 @@ public class UserResource {
         return ResponseEntity.ok(UserMapperImpl.toDTO(user));
     }
     @GetMapping("/users/get")
-    public ResponseEntity<List<UserDTO>> findAllUsers(){
-
-        return ResponseEntity.ok(userService.findAllUsers());
+    public ResponseEntity<List<UserDTO>> findAllUsers(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "50") int size){
+        return ResponseEntity.ok(userService.findAllUsers(page, size));
     }
 }

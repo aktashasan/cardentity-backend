@@ -2,9 +2,7 @@ package com.example.cardentity.user.model;
 
 import com.example.cardentity.user.model.User;
 import com.example.cardentity.user.model.UserDTO;
-import org.springframework.stereotype.Component;
 
-@Component
 public class UserMapperImpl {
 
     public static User toEntity (UserDTO userDTO){

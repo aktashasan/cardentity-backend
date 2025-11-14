@@ -21,14 +21,13 @@ public class AuthenticationResource {
 
     private final UserService userService;
 
-    private final UserMapperImpl userMapper;
-
     @GetMapping(path = "/login")
     public ResponseEntity<UserDTO> login(){
         User user = userService.findByUsername(
             SecurityContextHolder.getContext().getAuthentication().getName());
-            log.info(String.valueOf(user));
 
-        return ResponseEntity.ok(userMapper.toDTO(user));
+        log.debug("Loaded user {} for login", user != null ? user.getUsername() : "unknown");
+
+        return ResponseEntity.ok(UserMapperImpl.toDTO(user));
     }
 }
